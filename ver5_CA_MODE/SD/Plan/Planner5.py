@@ -20,12 +20,10 @@ class Planner:
     
     
     #=====Planner의 인스턴스를 생성시 실행될 함수=====
-    def __init__(self, main, debug):
+    def __init__(self, main, debug=False):
+        self.stop_event = main.stop_event
         self.__printc("생성")
         self.debug = debug
-        
-        #종료를 위한 stop_event
-        self.stop_event = main.stop_event
         
         #8889 소켓 & Tello address
         self.socket8889 = main.socket8889
