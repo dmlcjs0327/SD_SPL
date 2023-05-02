@@ -1,4 +1,4 @@
-from CAD.Decoder.h264_39 import h264decoder
+from SD.Decoder.h264_39 import h264decoder
 import numpy as np
 
 """

@@ -1,7 +1,7 @@
 import sys
-from CAD.Basemodel.Sensor import Sensor
-from CAD.Decoder import H264decoder
-from CAD.Decoder.h264_39 import h264decoder
+from SD.Basemodel.Sensor import Sensor
+from SD.Decoder import H264decoder
+from SD.Decoder.h264_39 import h264decoder
 import threading
 import traceback
 from time import sleep

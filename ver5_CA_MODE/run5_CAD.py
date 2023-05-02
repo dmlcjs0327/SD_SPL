@@ -2,11 +2,11 @@
 import threading
 import sys
 import socket
-from CAD.Plan.Planner5 import Planner
-from CAD.Tello.Tello8889Sensor import Tello8889Sensor
-from CAD.Tello.Tello11111Sensor import Tello11111Sensor
-from CAD.Tello.Tello8889Actor import Tello8889Actor
-from CAD.Test.TelloVirtualController import TelloVirtualController
+from SD.Plan.Planner5 import Planner
+from SD.Tello.Tello8889Sensor import Tello8889Sensor
+from SD.Tello.Tello11111Sensor import Tello11111Sensor
+from SD.Tello.Tello8889Actor import Tello8889Actor
+from SD.Test.TelloVirtualController import TelloVirtualController
 
 
 """
@@ -36,7 +36,7 @@ from CAD.Test.TelloVirtualController import TelloVirtualController
 
 class Main:
     
-    def __init__(self):
+    def __init__(self, debug):
         print(">>> 프로그램 준비중...")
         #종료를 위한 stop_event
         self.stop_event = threading.Event()
@@ -73,17 +73,24 @@ class Main:
         print("드론 연결 완료")
         
         #객체 생성
-        self.planner = Planner(self)
-        
-        self.tello8889sensor = Tello8889Sensor(self)
-        self.tello11111sensor = Tello11111Sensor(self)
-        self.tello8889actor = Tello8889Actor(self)
-        
-        self.virtual_controller = TelloVirtualController(self)
-        
-        #GUI 메인 루프 시작
-        print(">>> 프로그램 실행")
-        self.virtual_controller.root.mainloop()
+        if not debug:
+            self.planner = Planner(self)
+            
+            self.tello8889sensor = Tello8889Sensor(self)
+            self.tello11111sensor = Tello11111Sensor(self)
+            self.tello8889actor = Tello8889Actor(self)
+            
+            self.virtual_controller = TelloVirtualController(self)
+            
+            #GUI 메인 루프 시작
+            print(">>> 프로그램 실행")
+            self.virtual_controller.root.mainloop()
+        else:
+            self.planner = True
+            self.tello8889sensor = True
+            self.tello11111sensor = True
+            self.tello8889actor = True
+            self.virtual_controller = True
 
 
 

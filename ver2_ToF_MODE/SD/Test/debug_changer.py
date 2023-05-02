@@ -1,6 +1,6 @@
 import re, os, chardet
 
-file_name = "TEST_run1_base.py"
+file_name = "TEST_run2_tof.py"
 file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), file_name)
 
 
@@ -13,7 +13,7 @@ print(encoding)
 with open(file_path, "r", encoding=encoding) as f:
     content = f.read()
 
-pattern = r"(test_TID)(\d{4})"
+pattern = r"(test_TID0)(\d{3})"
 matches = re.findall(pattern, content)
 
 re_obj = re.compile(pattern)  # 정규표현식을 컴파일한 re 객체 생성

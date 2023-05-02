@@ -35,7 +35,7 @@ from SD.Test.TelloVirtualController import TelloVirtualController
 
 class Main:
     
-    def __init__(self):
+    def __init__(self, debug):
         print("********************TOF MODE: 적외선 센서의 거리값이 출력됩니다********************")
         print(">>> 프로그램 준비중...")
         #종료를 위한 stop_event
@@ -62,17 +62,24 @@ class Main:
         
         print("드론 연결 완료")
         
-        #객체 생성
-        self.planner = Planner(self)
         
-        self.tello8889sensor = Tello8889Sensor(self)
-        self.tello8889actor = Tello8889Actor(self)
+        if not debug:
+            #객체 생성
+            self.planner = Planner(self)
+            
+            self.tello8889sensor = Tello8889Sensor(self)
+            self.tello8889actor = Tello8889Actor(self)
+            
+            self.virtual_controller = TelloVirtualController(self)
         
-        self.virtual_controller = TelloVirtualController(self)
-        
-        #GUI 메인 루프 시작
-        print(">>> 프로그램 실행")
-        self.virtual_controller.root.mainloop()
+            #GUI 메인 루프 시작
+            print(">>> 프로그램 실행")
+            self.virtual_controller.root.mainloop()
+        else:
+            self.planner = True
+            self.tello8889sensor = True
+            self.tello8889actor = True
+            self.virtual_controller = True
 
 
 

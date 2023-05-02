@@ -1,5 +1,5 @@
-from CAD.Basemodel.Actor import Actor
-from CAD.Calculation import ValueChanger
+from SD.Basemodel.Actor import Actor
+from SD.Calculation import ValueChanger
 from time import sleep
 import threading
 import sys

@@ -2,8 +2,8 @@ import threading
 import sys
 import traceback
 from time import sleep
-from CAD.Calculation import ValueChanger
-from CAD.ObjectDetector.YOLOv5 import YOLOv5
+from SD.Calculation import ValueChanger
+from SD.ObjectDetector.YOLOv5 import YOLOv5
 from numpy import *
 
 
@@ -20,8 +20,9 @@ class Planner:
     
     
     #=====Planner의 인스턴스를 생성시 실행될 함수=====
-    def __init__(self, main):
+    def __init__(self, main, debug):
         self.__printc("생성")
+        self.debug = debug
         
         #종료를 위한 stop_event
         self.stop_event = main.stop_event
@@ -76,13 +77,13 @@ class Planner:
         self.__printf("실행",sys._getframe().f_code.co_name)
         
         try:
-            while not self.stop_event.is_set() and not hasattr(self.__main, 'virtual_controller'):
+            while not self.debug and not self.stop_event.is_set() and not hasattr(self.__main, 'virtual_controller'):
                 self.__printf("대기중",sys._getframe().f_code.co_name)
                 sleep(1)
                 
             self.__virtual_controller = self.__main.virtual_controller
                 
-            while not self.stop_event.is_set():
+            while not self.debug and not self.stop_event.is_set():
                 #1) frame 정보가 존재하면, frame에 대해 장애물 윈도우를 그리기
                 frame, tof, object_coor =  self.__redraw_frame() #좌표받아오기
                 

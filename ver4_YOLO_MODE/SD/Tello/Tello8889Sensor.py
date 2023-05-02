@@ -1,6 +1,6 @@
-from CAD.Basemodel.Sensor import Sensor
-from CAD.Calculation import ValueChecker
-from CAD.Calculation import ValueChanger
+from SD.Basemodel.Sensor import Sensor
+from SD.Calculation import ValueChecker
+from SD.Calculation import ValueChanger
 import threading
 import sys
 import traceback

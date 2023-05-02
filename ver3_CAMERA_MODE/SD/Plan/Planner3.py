@@ -18,8 +18,9 @@ class Planner:
     
     
     #=====Planner의 인스턴스를 생성시 실행될 함수=====
-    def __init__(self, main):
+    def __init__(self, main, debug):
         self.__printc("생성")
+        self.debug = debug
         
         #종료를 위한 stop_event
         self.stop_event = main.stop_event
@@ -61,7 +62,7 @@ class Planner:
         self.__printf("실행",sys._getframe().f_code.co_name)
         
         try:
-            while not self.stop_event.is_set() and not hasattr(self.__main, 'virtual_controller'):
+            while not self.debug and not self.stop_event.is_set() and not hasattr(self.__main, 'virtual_controller'):
                 self.__printf("대기중",sys._getframe().f_code.co_name)
                 sleep(1)
                 
@@ -69,6 +70,8 @@ class Planner:
                 
             while not self.stop_event.is_set():
                 self.__draw_image() #좌표받아오기
+                if self.debug:
+                    break
 
 
         except Exception as e:

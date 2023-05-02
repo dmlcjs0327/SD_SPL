@@ -1,5 +1,5 @@
-from CAD.Basemodel.ObjectDetector import ObjectDetector
-from CAD.Calculation import ValueChanger
+from SD.Basemodel.ObjectDetector import ObjectDetector
+from SD.Calculation import ValueChanger
 import torch
 import numpy as np
 from PIL import Image,ImageTk
@@ -18,7 +18,7 @@ class YOLOv5(ObjectDetector):
 
         #모델 객체 생성
         #local에서 YOLO 사용: https://stackoverflow.com/questions/71251177/how-to-use-yolov5-api-with-flask-offline
-        self.__model = torch.hub.load(r'CAD/ObjectDetector/yolov5', 'custom', path=r'CAD/ObjectDetector/yolov5s.pt', source='local')
+        self.__model = torch.hub.load(r'SD/ObjectDetector/yolov5', 'custom', path=r'SD/ObjectDetector/yolov5s.pt', source='local')
         self.__classes = self.__model.names
         self.__device = 'cuda' if torch.cuda.is_available() else 'cpu'
         print(">>>>>>GPU 사용:",self.__device)
