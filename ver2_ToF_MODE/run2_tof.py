@@ -2,10 +2,10 @@
 import threading
 import sys
 import socket
-from CAD.Plan.Planner2 import Planner
-from CAD.Tello.Tello8889Sensor import Tello8889Sensor
-from CAD.Tello.Tello8889Actor import Tello8889Actor
-from CAD.Test.TelloVirtualController import TelloVirtualController
+from SD.Plan.Planner2 import Planner
+from SD.Tello.Tello8889Sensor import Tello8889Sensor
+from SD.Tello.Tello8889Actor import Tello8889Actor
+from SD.Test.TelloVirtualController import TelloVirtualController
 
 
 """
