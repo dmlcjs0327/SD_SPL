@@ -1031,13 +1031,13 @@ class TestScenario_yolo(unittest.TestCase):
         # self.__lock_info_11111Sensor_image.release()
         return info
         
-    def test_TID4008(self):
+    def test_TID4010(self):
         image, _ = self.detect_from_frame('test', 50)
         self.set_info_11111Sensor_image(image)
         result = self.get_info_11111Sensor_image()
         self.assertEqual('test',result)
       
-    def test_TID4009(self):
+    def test_TID4011(self):
         image, _ = self.detect_from_frame(None, 50)
         self.set_info_11111Sensor_image(image)
         result = self.get_info_11111Sensor_image()
