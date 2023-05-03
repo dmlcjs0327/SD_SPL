@@ -1425,7 +1425,6 @@ class TestScenario_CAD(unittest.TestCase):
         cmd = self.tello8889actor.result
         self.assertEqual(cmd, None)
         
-
     def test_TID5009(self):
         test_tof = b"50"
         self.tello8889sensor = MockTello8889Sensor(test_tof)
@@ -1440,8 +1439,6 @@ class TestScenario_CAD(unittest.TestCase):
         cmd = self.tello8889actor.result
         self.assertEqual(cmd, "rc 60 0 0 0")
         
-        
-
     def test_TID5010(self):
         test_tof = b"10"
         self.tello8889sensor = MockTello8889Sensor(test_tof)

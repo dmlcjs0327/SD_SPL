@@ -679,11 +679,42 @@ class TestChangeValues(unittest.TestCase):
 class TestScenario_control(unittest.TestCase):
     
     def setUp(self):
-        self.__cmd_queue = [] #������ ������ ť
-        
-    def on_keypress_test(self, test_key, test_direction):
-        print(test_key,test_direction)
-        self.move(test_direction,50)
+        self.__cmd_queue = []
+        self.__cm = 50
+        self.__degree = 50
+    
+    def rotate(self, direction, degree):
+        """
+        direction: ccw, cw
+        degree: 0~360 degree
+        """
+        self.send_cmd("{} {}".format(direction, degree))
+    
+    def __printr(self,key:str,action:str):
+        self.__printc("KEYBOARD {}: {} {} degree".format(key, action,self.__degree))
+    
+    def __printc(self,msg:str):
+        print("[{}] {}".format(self.__class__.__name__,msg))
+    
+    def __printm(self,key:str,action:str):
+        self.__printc("KEYBOARD {}: {} {} cm".format(key, action,self.__cm))
+    
+    def on_keypress_w(self, event):
+        self.__printr("W","UP")
+        self.move('up',self.__cm)
+    
+    def on_keypress_a(self, event):
+        self.__printr("A","CCW")
+        self.rotate("ccw",self.__degree)
+
+
+    def on_keypress_d(self, event):
+        self.__printr("D","CW")
+        self.rotate("cw",self.__degree)
+    
+    def on_keypress_s(self, event):
+        self.__printm("S","down")
+        self.move('down',self.__cm)
     
     def takeoff(self): #return: Tello�� receive 'OK' or 'FALSE'
          self.send_cmd('takeoff')
@@ -724,29 +755,26 @@ class TestScenario_control(unittest.TestCase):
         return data
 
     def take_cmd_from_planner(self): 
-        """
-        Planner�κ��� cmd�� �����´�
-        """
         cmd = self.pop_cmd_queue()
         return cmd
     
     def test_TID1062(self):
-        self.on_keypress_test('w', 'up')
+        self.on_keypress_w(None)
         cmd = self.take_cmd_from_planner()
         self.assertEqual('up 50',cmd)
     
     def test_TID1063(self):
-        self.on_keypress_test('a', 'ccw')
+        self.on_keypress_a(None)
         cmd = self.take_cmd_from_planner()
         self.assertEqual('ccw 50',cmd)
     
     def test_TID1064(self):
-        self.on_keypress_test('d', 'cw')
+        self.on_keypress_d(None)
         cmd = self.take_cmd_from_planner()
         self.assertEqual('cw 50',cmd)
     
     def test_TID1065(self):
-        self.on_keypress_test('s', 'down')
+        self.on_keypress_s(None)
         cmd = self.take_cmd_from_planner()
         self.assertEqual('down 50',cmd)
     
@@ -759,12 +787,8 @@ class TestScenario_control(unittest.TestCase):
         self.land()
         cmd = self.take_cmd_from_planner()
         self.assertEqual('land',cmd)
-    
-    def test_sleep(self):
-        import time
-        time.sleep(1)
-        
 
+        
         
 #===========================================================================================================                     
 if __name__ == "__main__":
